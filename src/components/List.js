@@ -1,14 +1,25 @@
 import React, {Component} from 'react';
-import Data from '../data/subscribers.json'
+import DataSubcribers from '../data/subscribers.json'
 import './styles/List.css'
 
 class List extends Component {
-    render() {
-      function order(type) {
-        Data.sort(function (a, b) {
+
+  state = {
+    Data : DataSubcribers
+  }
+
+   order = function (type) {
+     
+    DataSubcribers.sort(function (a, b) {
         return a[type].localeCompare(b[type]);
     });
-      }
+
+      this.setState({Data: DataSubcribers})
+    }
+
+
+    render() {
+      
         return (
       <div>
         <table>
@@ -21,7 +32,7 @@ class List extends Component {
             </tr>
           </thead>
           <tbody>
-            {Data.map(element => {
+            {this.state.Data.map(element => {
               return (
                 <tr>
                   <td>{element.name}</td>
@@ -33,10 +44,13 @@ class List extends Component {
             })}
           </tbody>
         </table>
-        <button onClick={() => order("name")}>Sort by name</button>
-        <button onClick={() => order("age")}>Sort by age</button>
-        <button onClick={() => order("sport")}>Sort by sport</button>
+
+        <button onClick={() => this.order("name")}>Sort by name</button>
+        <button onClick={() => this.order("age")}>Sort by age</button>
+        <button onClick={() => this.order("sport")}>Sort by sport</button>
        
+           
+         
       </div>
     
         );
