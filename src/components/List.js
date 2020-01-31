@@ -1,0 +1,47 @@
+import React, {Component} from 'react';
+import Data from '../data/subscribers.json'
+import './styles/List.css'
+
+class List extends Component {
+    render() {
+      function order(type) {
+        Data.sort(function (a, b) {
+        return a[type].localeCompare(b[type]);
+    });
+      }
+        return (
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last name</th>
+              <th>Age</th>
+              <th>Sport</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Data.map(element => {
+              return (
+                <tr>
+                  <td>{element.name}</td>
+                  <td>{element.lastName}</td>
+                  <td>{element.age}</td>
+                  <td>{element.sport}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button onClick={() => order("name")}>Sort by name</button>
+        <button onClick={() => order("age")}>Sort by age</button>
+        <button onClick={() => order("sport")}>Sort by sport</button>
+       
+      </div>
+    
+        );
+    }
+}
+
+
+export default List;
